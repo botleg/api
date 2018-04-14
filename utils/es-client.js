@@ -1,5 +1,18 @@
 'use strict'
 const elasticsearch = require('elasticsearch')
+const bodyTemplate = {
+  query: {
+    multi_match: {
+      type: 'best_fields',
+      fuzziness: 'AUTO',
+      tie_breaker: 0.3,
+      fields: [ 'title', 'text' ]
+    }
+  },
+  _source: [ 'title', 'summary' ],
+  from: 0,
+  size: 10
+}
 
 class ESClient {
   constructor () {
@@ -23,6 +36,17 @@ class ESClient {
         size: 1000,
         _source: [ 'title', 'comments' ]
       }
+    })
+  }
+
+  async searchPosts (query) {
+    let body = bodyTemplate
+    body.query.multi_match.query = query
+
+    return this.client.search({
+      index: process.env.ES_INDEX,
+      type: process.env.ES_TYPE,
+      body: body
     })
   }
 }
