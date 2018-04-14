@@ -4,11 +4,12 @@ const ESClient = require('../utils/es-client')
 exports.handler = async event => {
   try {
     const es = new ESClient()
-    const count = await es.count()
+    const res = await es.count()
 
     return (null, {
       statusCode: 200,
-      body: JSON.stringify({ count: count })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ count: res.count })
     })
   } catch (err) {
     console.error(err.stack)
