@@ -1,6 +1,7 @@
 service       : botleg
 
 provider:
+  environment : ${file(env.yml)}
   memorySize  : 256
   name        : aws
   region      : us-east-1
@@ -13,8 +14,9 @@ package:
 
 functions:
   count:
-    handler   : count.handler
+    handler   : handlers/count.handler
     events:
     - http:
         path: count
         method: get
+        cors: false
