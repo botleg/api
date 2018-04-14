@@ -20,3 +20,11 @@ functions:
         path: count
         method: get
         cors: false
+
+  comments:
+    handler   : handlers/comments.handler
+    events:
+    - http:
+        path: comments
+        method: get
+        cors: false

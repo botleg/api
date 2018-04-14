@@ -9,12 +9,21 @@ class ESClient {
   }
 
   async count () {
-    const res = await this.client.count({
+    return this.client.count({
       index: process.env.ES_INDEX,
       type: process.env.ES_TYPE
     })
+  }
 
-    return res.count
+  async fetchComments () {
+    return this.client.search({
+      index: process.env.ES_INDEX,
+      type: process.env.ES_TYPE,
+      body: {
+        size: 1000,
+        _source: [ 'title', 'comments' ]
+      }
+    })
   }
 }
 
