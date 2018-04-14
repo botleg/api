@@ -29,8 +29,8 @@ functions:
         method: get
         cors: false
 
-  search:
-    handler: handlers/search.handler
+  searchFirst:
+    handler: handlers/search.single
     events:
     - http:
         path: search/{query}
@@ -39,4 +39,18 @@ functions:
         request:
           parameters:
             paths:
+              query: true
+
+  searchPaginated:
+    handler: handlers/search.paginated
+    events:
+    - http:
+        path: search/{query}/{page}
+        method: get
+        cors: false
+        request:
+          parameters:
+            paths:
+              query: true
+            page:
               query: true

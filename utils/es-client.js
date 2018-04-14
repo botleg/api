@@ -10,7 +10,6 @@ const bodyTemplate = {
     }
   },
   _source: [ 'title', 'summary' ],
-  from: 0,
   size: 10
 }
 
@@ -39,9 +38,10 @@ class ESClient {
     })
   }
 
-  async searchPosts (query) {
+  async searchPosts (query, from = 1) {
     let body = bodyTemplate
     body.query.multi_match.query = query
+    body.from = (from - 1) * body.size
 
     return this.client.search({
       index: process.env.ES_INDEX,
