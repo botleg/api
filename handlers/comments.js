@@ -5,21 +5,20 @@ exports.handler = async event => {
   try {
     const es = new ESClient()
     const res = await es.fetchComments()
-
-    let count = 0
-    let comments = []
-
-    for (let post of res.hits.hits) {
-      if (post._source.comments.length) {
-        comments.push(post._source)
-        count += post._source.comments.length
-      }
-    }
+    const filtered = res.hits.hits.filter(item => item._source.comments.length)
+    const comments = filtered.map(item => item._source)
+    const count = filtered.reduce((val, item) => (val + item._source.comments.length), 0)
 
     return (null, {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ count: count, comments: comments })
+      headers: {
+        'Cache-Control': 'max-age=600',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        count: count,
+        comments: comments
+      })
     })
   } catch (err) {
     console.error(err.stack)
