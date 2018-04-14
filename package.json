@@ -6,8 +6,9 @@
     "node": "8.10.0"
   },
   "scripts": {
-    "local": "serverless invoke local -f",
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy",
+    "lint": "standard",
+    "local": "serverless invoke local -f"
   },
   "license": "GPL-3.0",
   "repository": {
@@ -15,6 +16,10 @@
     "url": "git+ssh://git@github.com/botleg/api.git"
   },
   "devDependencies": {
-    "serverless": "^1.26.1"
+    "serverless": "^1.26.1",
+    "standard": "^11.0.1"
+  },
+  "dependencies": {
+    "elasticsearch": "^14.2.2"
   }
 }
