@@ -1,20 +1,20 @@
-service       : botleg
+service: botleg
 
 provider:
-  environment : ${file(env.yml)}
-  memorySize  : 256
-  name        : aws
-  region      : us-east-1
-  runtime     : nodejs8.10
-  timeout     : 60
+  environment: ${file(env.yml)}
+  memorySize: 256
+  name: aws
+  region: us-east-1
+  runtime: nodejs8.10
+  timeout: 60
 
 package:
   exclude:
-    - .git/**
+  - .git/**
 
 functions:
   count:
-    handler   : handlers/count.handler
+    handler: handlers/count.handler
     events:
     - http:
         path: count
@@ -22,9 +22,35 @@ functions:
         cors: false
 
   comments:
-    handler   : handlers/comments.handler
+    handler: handlers/comments.handler
     events:
     - http:
         path: comments
         method: get
         cors: false
+
+  searchFirst:
+    handler: handlers/search.single
+    events:
+    - http:
+        path: search/{query}
+        method: get
+        cors: false
+        request:
+          parameters:
+            paths:
+              query: true
+
+  searchPaginated:
+    handler: handlers/search.paginated
+    events:
+    - http:
+        path: search/{query}/{page}
+        method: get
+        cors: false
+        request:
+          parameters:
+            paths:
+              query: true
+            page:
+              query: true

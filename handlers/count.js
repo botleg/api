@@ -8,7 +8,10 @@ exports.handler = async event => {
 
     return (null, {
       statusCode: 200,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Cache-Control': 'max-age=3600',
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ count: res.count })
     })
   } catch (err) {
