@@ -1,0 +1,10 @@
+# package directories
+node_modules
+
+# Serverless directories
+.serverless
+
+# Environment
+temp/
+config.yml
+env.yml

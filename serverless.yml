@@ -1,0 +1,20 @@
+service       : botleg
+
+provider:
+  memorySize  : 256
+  name        : aws
+  region      : us-east-1
+  runtime     : nodejs8.10
+  timeout     : 60
+
+package:
+  exclude:
+    - .git/**
+
+functions:
+  count:
+    handler   : count.handler
+    events:
+    - http:
+        path: count
+        method: get

@@ -1,0 +1,20 @@
+{
+  "name": "botleg",
+  "description": "API for botleg blog",
+  "main": "app.js",
+  "engines": {
+    "node": "8.10.0"
+  },
+  "scripts": {
+    "local": "serverless invoke local -f",
+    "deploy": "serverless deploy"
+  },
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/botleg/api.git"
+  },
+  "devDependencies": {
+    "serverless": "^1.26.1"
+  }
+}
