@@ -1,7 +1,7 @@
 'use strict'
 const ESClient = require('../utils/es-client')
 
-exports.handler = async event => {
+exports.all = async event => {
   try {
     const es = new ESClient()
     const res = await es.fetchComments()
@@ -19,6 +19,29 @@ exports.handler = async event => {
         count: count,
         comments: comments
       })
+    })
+  } catch (err) {
+    console.error(err.stack)
+  }
+}
+
+exports.post = async (event) => {
+  try {
+    const es = new ESClient()
+    const res = await es.fetchCommentsPost(event.pathParameters.id)
+
+    let body = []
+    if (res.found) {
+      body = res._source.comments
+    }
+
+    return (null, {
+      statusCode: 200,
+      headers: {
+        'Cache-Control': 'max-age=600',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
     })
   } catch (err) {
     console.error(err.stack)

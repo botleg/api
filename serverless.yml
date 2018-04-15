@@ -21,13 +21,25 @@ functions:
         method: get
         cors: false
 
-  comments:
-    handler: handlers/comments.handler
+  commentsAll:
+    handler: handlers/comments.all
     events:
     - http:
         path: comments
         method: get
         cors: false
+
+  commentsPost:
+    handler: handlers/comments.post
+    events:
+    - http:
+        path: comments/{id}
+        method: get
+        cors: false
+        request:
+          parameters:
+            path:
+              id: true
 
   searchFirst:
     handler: handlers/search.single
