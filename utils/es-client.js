@@ -38,6 +38,15 @@ class ESClient {
     })
   }
 
+  async fetchCommentsPost (id) {
+    return this.client.get({
+      index: process.env.ES_INDEX,
+      type: process.env.ES_TYPE,
+      id: id,
+      _source: ['comments']
+    })
+  }
+
   async searchPosts (query, from = 1) {
     let body = bodyTemplate
     body.query.multi_match.query = query
