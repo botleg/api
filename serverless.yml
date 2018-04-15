@@ -60,3 +60,11 @@ functions:
         path: comments/{id}
         method: post
         cors: false
+
+  commit:
+    handler: handlers/commit.handler
+    events:
+    - http:
+        path: commit
+        method: post
+        cors: false

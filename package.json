@@ -7,7 +7,7 @@
   },
   "scripts": {
     "deploy": "serverless deploy",
-    "lint": "standard",
+    "lint": "eslint **/*.js",
     "local": "serverless invoke local -f"
   },
   "license": "GPL-3.0",
@@ -16,12 +16,19 @@
     "url": "git+ssh://git@github.com/botleg/api.git"
   },
   "devDependencies": {
+    "eslint-config-standard": "^11.0.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-node": "^6.0.1",
+    "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-standard": "^3.0.1",
     "serverless": "^1.26.1",
     "standard": "^11.0.1"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "bluebird": "^3.5.1",
     "elasticsearch": "^14.2.2",
+    "eslint": "^4.19.1",
     "slack-node": "^0.1.8"
   }
 }

@@ -18,6 +18,15 @@ class SlackClient {
       text: `*${id.split('-').join(' ')}*\n${body.name}: ${body.text}`
     })
   }
+
+  async updateStory (operation, title) {
+    return this.webhook({
+      channel: '#blog',
+      username: 'posts',
+      icon_emoji: ':postbox:',
+      text: `*Post ${operation}*\n${title}`
+    })
+  }
 }
 
 module.exports = SlackClient
