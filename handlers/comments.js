@@ -38,6 +38,7 @@ exports.post = async (event) => {
     return (null, {
       statusCode: 200,
       headers: {
+        'Access-Control-Allow-Origin': 'https://botleg.com',
         'Cache-Control': 'max-age=600',
         'Content-Type': 'application/json'
       },

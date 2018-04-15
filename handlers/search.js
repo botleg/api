@@ -13,6 +13,7 @@ const processResults = async (...args) => {
   return (null, {
     statusCode: 200,
     headers: {
+      'Access-Control-Allow-Origin': 'https://botleg.com',
       'Cache-Control': 'max-age=3600',
       'Content-Type': 'application/json'
     },

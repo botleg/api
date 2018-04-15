@@ -27,7 +27,8 @@ functions:
     - http:
         path: search/{query}
         method: get
-        cors: false
+        cors:
+          origin: https://botleg.com
 
   searchPaginated:
     handler: handlers/search.paginated
@@ -35,7 +36,8 @@ functions:
     - http:
         path: search/{query}/{page}
         method: get
-        cors: false
+        cors:
+          origin: https://botleg.com
 
   commentsAll:
     handler: handlers/comments.all
@@ -51,7 +53,8 @@ functions:
     - http:
         path: comments/{id}
         method: get
-        cors: false
+        cors:
+          origin: https://botleg.com
 
   commentsWrite:
     handler: handlers/write.handler
@@ -59,7 +62,8 @@ functions:
     - http:
         path: comments/{id}
         method: post
-        cors: false
+        cors:
+          origin: https://botleg.com
 
   commit:
     handler: handlers/commit.handler

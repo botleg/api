@@ -73,31 +73,33 @@ class ESClient {
   }
 
   async indexDoc (id, data) {
+    const split = data.split('\n')
+
     return this.client.index({
       index: process.env.ES_INDEX,
       type: process.env.ES_TYPE,
       id: id,
       body: {
-        doc: {
-          comments: [],
-          title: data.split('\n')[2].slice(7),
-          text: data,
-          summary: data.split('\n')[1].slice(9)
-        }
+        comments: [],
+        title: split[2].slice(7),
+        text: data,
+        summary: split[1].slice(9)
       }
     })
   }
 
   async updateDoc (id, data) {
+    const split = data.split('\n')
+
     return this.client.update({
       index: process.env.ES_INDEX,
       type: process.env.ES_TYPE,
       id: id,
       body: {
         doc: {
-          title: data.split('\n')[2].slice(7),
+          title: split[2].slice(7),
           text: data,
-          summary: data.split('\n')[1].slice(9)
+          summary: split[1].slice(9)
         }
       }
     })
