@@ -6,6 +6,9 @@ const genResponse = state => {
   return (null, {
     statusCode: 200,
     headers: {
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': 'https://botleg.com',
+      'Access-Control-Allow-Headers': 'Content-Type',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(state)
