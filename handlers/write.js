@@ -1,5 +1,6 @@
 'use strict'
 const ESClient = require('../utils/es-client')
+const SlackClient = require('../utils/slack-client')
 
 const genResponse = state => {
   return (null, {
@@ -19,13 +20,16 @@ exports.handler = async event => {
     }
 
     const es = new ESClient()
-    const res = await es.fetchCommentsPost(event.pathParameters.id)
+    const slackClient = new SlackClient()
+    const id = event.pathParameters.id
+    const res = await es.fetchCommentsPost(id)
 
     if (res.found) {
       let comments = res._source.comments
       comments.unshift(body)
 
-      await es.updateComments(event.pathParameters.id, comments)
+      await es.updateComments(id, comments)
+      await slackClient.postComment(id, body)
       return genResponse(true)
     } else {
       return genResponse(false)
