@@ -58,6 +58,19 @@ class ESClient {
       body: body
     })
   }
+
+  async updateComments (id, comments) {
+    return this.client.update({
+      index: process.env.ES_INDEX,
+      type: process.env.ES_TYPE,
+      id: id,
+      body: {
+        doc: {
+          comments: comments
+        }
+      }
+    })
+  }
 }
 
 module.exports = ESClient

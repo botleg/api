@@ -20,6 +20,8 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
-    "elasticsearch": "^14.2.2"
+    "bluebird": "^3.5.1",
+    "elasticsearch": "^14.2.2",
+    "slack-node": "^0.1.8"
   }
 }
