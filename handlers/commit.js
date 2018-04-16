@@ -1,11 +1,16 @@
 'use strict'
 const axios = require('axios')
+const crypto = require('crypto')
 const ESClient = require('../utils/es-client')
 const SlackClient = require('../utils/slack-client')
 
+const sign = data => {
+  return crypto.createHmac('sha1', process.env.GITHUB_SECRET).update(data).digest('hex')
+}
+
 exports.handler = async event => {
   try {
-    if (event.headers['X-Hub-Signature'] !== `sha1=${process.env.GITHUB_SECRET}`) {
+    if (event.headers['X-Hub-Signature'] !== `sha1=${sign(event.body)}`) {
       return (null, { statusCode: 401 })
     }
 
