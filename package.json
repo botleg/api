@@ -25,7 +25,7 @@
     "standard": "^11.0.1"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bluebird": "^3.5.1",
     "elasticsearch": "^14.2.2",
     "eslint": "^4.19.1",
